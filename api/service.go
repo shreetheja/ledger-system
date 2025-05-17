@@ -2,8 +2,8 @@ package api
 
 import (
 	"encoding/json"
-	"inoscipta/service"
-	response "inoscipta/utils"
+	"ledger/service"
+	response "ledger/utils"
 	"net/http"
 )
 

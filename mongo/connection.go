@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"inoscipta/config"
+	"ledger/config"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

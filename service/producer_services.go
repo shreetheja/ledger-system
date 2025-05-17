@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"inoscipta/kafka"
-	"inoscipta/pg"
+	"ledger/kafka"
+	"ledger/pg"
 	"log"
 	"time"
 )

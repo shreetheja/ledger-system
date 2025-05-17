@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"inoscipta/config"
+	"ledger/config"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
 )

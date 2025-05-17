@@ -1,7 +1,7 @@
 package api
 
 import (
-	response "inoscipta/utils"
+	response "ledger/utils"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"

@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"inoscipta/kafka"
-	"inoscipta/mongo"
-	"inoscipta/pg"
+	"ledger/kafka"
+	"ledger/mongo"
+	"ledger/pg"
 	"log"
 
 	"github.com/google/uuid"
