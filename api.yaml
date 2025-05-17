@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: Inoscipta Balance API
+  description: API to manage user balances (create, get, add, deduct).
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /balance:
+    get:
+      summary: Get user balance
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The user ID
+      responses:
+        "200":
+          description: User balance retrieved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalanceResponse"
+        "400":
+          description: Missing user_id
+        "500":
+          description: Internal server error
+
+    post:
+      summary: Create new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmountRequest"
+      responses:
+        "200":
+          description: Account created successfully
+        "400":
+          description: Invalid input
+        "500":
+          description: Error creating account
+
+  /balance/add:
+    post:
+      summary: Add amount to user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmountRequest"
+      responses:
+        "200":
+          description: Amount added successfully
+        "400":
+          description: Invalid input
+        "500":
+          description: Error adding amount
+
+  /balance/deduct:
+    post:
+      summary: Deduct amount from user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmountRequest"
+      responses:
+        "200":
+          description: Amount deducted successfully
+        "400":
+          description: Invalid input
+        "500":
+          description: Error deducting amount
+
+components:
+  schemas:
+    AmountRequest:
+      type: object
+      required:
+        - user_id
+        - amount
+      properties:
+        user_id:
+          type: string
+          example: user123
+        amount:
+          type: number
+          format: float
+          example: 100.0
+
+    BalanceResponse:
+      type: object
+      properties:
+        user_id:
+          type: string
+          example: user123
+        balance:
+          type: number
+          format: float
+          example: 1000.0

@@ -1,0 +1,32 @@
+### Create New Account
+POST http://localhost:1337/balance
+Content-Type: application/json
+
+{
+  "user_id": "user123",
+  "amount": 1000
+}
+
+### Get Balance
+GET http://localhost:1337/balance?user_id=user123
+
+### Add Amount
+POST http://localhost:1337/balance/add
+Content-Type: application/json
+
+{
+  "user_id": "user123",
+  "amount": 500
+}
+
+### Deduct Amount
+POST http://localhost:1337/balance/deduct
+Content-Type: application/json
+
+{
+  "user_id": "user123",
+  "amount": 200
+}
+
+### Get Balance Again
+GET http://localhost:1337/balance?user_id=user123
