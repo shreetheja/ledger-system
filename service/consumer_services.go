@@ -178,3 +178,11 @@ func HandleDeductBalance(msg kafka.DeductBalanceMessage) error {
 	log.Printf("Handled balance deduction for user %s with amount %f\n", msg.UserID, msg.Amount)
 	return nil
 }
+
+func GetUserLogs(userID string) ([]mongo.LedgerRecord, error) {
+	records, err := mongo.GetUserLogs(userID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user logs: %w", err)
+	}
+	return records, nil
+}

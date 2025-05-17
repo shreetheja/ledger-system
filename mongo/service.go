@@ -35,3 +35,21 @@ func RecordTransaction(ctx context.Context, records []LedgerRecord) error {
 
 	return nil
 }
+
+func GetUserLogs(userID string) ([]LedgerRecord, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	cursor, err := LedgerCollection.Find(ctx, map[string]string{"user_id": userID})
+	if err != nil {
+		return nil, fmt.Errorf("failed to find user logs: %w", err)
+	}
+	defer cursor.Close(ctx)
+
+	var records []LedgerRecord
+	if err = cursor.All(ctx, &records); err != nil {
+		return nil, fmt.Errorf("failed to decode user logs: %w", err)
+	}
+
+	return records, nil
+}

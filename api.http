@@ -30,3 +30,8 @@ Content-Type: application/json
 
 ### Get Balance Again
 GET http://localhost:1337/balance?user_id=user123
+
+
+##### GET LOGS 
+
+GET http://localhost:1337/logs?user_id=user123

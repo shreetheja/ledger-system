@@ -71,3 +71,17 @@ func CreateAccount(w http.ResponseWriter, r *http.Request) {
 	response.RespondWithJSON(w, http.StatusOK, "account created successfully")
 
 }
+
+func GetLogsHandler(w http.ResponseWriter, r *http.Request) {
+	userID := r.URL.Query().Get("user_id")
+	if userID == "" {
+		response.RespondWithHTML(w, http.StatusBadRequest, "user_id is required")
+		return
+	}
+	logs, err := service.GetUserLogs(userID)
+	if err != nil {
+		response.RespondWithHTML(w, http.StatusInternalServerError, "Error retrieving logs")
+		return
+	}
+	response.RespondWithJSON(w, http.StatusOK, logs)
+}

@@ -80,6 +80,56 @@ paths:
         "500":
           description: Error deducting amount
 
+  /logs:
+    get:
+      summary: Get ledger records for a user
+      description: |
+        Returns the chronological list of ledger operations (account creation,
+        balance additions, deductions) for the specified user.
+      operationId: getUserLogs
+      parameters:
+        - in: query
+          name: user_id
+          schema:
+            type: string
+          required: true
+          description: ID of the user whose ledger records you want.
+      responses:
+        "200":
+          description: Successful response with an array of ledger records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LedgerRecord"
+              examples:
+                userLogs:
+                  summary: Example user ledger history
+                  value:
+                    - ID: "68288add6ee785717cadd437"
+                      UserID: "user123"
+                      Operation: "CreateAccount"
+                      Amount: 1000
+                      Timestamp: "2025-05-17T13:10:53.224Z"
+                      TransactionID: "0864a47f-ad94-4546-b02e-8697599d42bc"
+                    - ID: "68288ae96ee785717cadd438"
+                      UserID: "user123"
+                      Operation: "AddBalance"
+                      Amount: 500
+                      Timestamp: "2025-05-17T13:11:05.674Z"
+                      TransactionID: "a275e021-af73-4425-9e5e-7d71981c34f1"
+                    - ID: "68288af26ee785717cadd439"
+                      UserID: "user123"
+                      Operation: "DeductBalance"
+                      Amount: -200
+                      Timestamp: "2025-05-17T13:11:14.328Z"
+                      TransactionID: "f730df37-0632-46ca-bb6d-ec38fabaa44c"
+        "400":
+          description: Invalid or missing `user_id` parameter.
+        "500":
+          description: Internal server error.
+
 components:
   schemas:
     AmountRequest:
@@ -95,7 +145,33 @@ components:
           type: number
           format: float
           example: 100.0
-
+    LedgerRecord:
+      type: object
+      properties:
+        ID:
+          type: string
+          description: Unique document ID in MongoDB.
+        UserID:
+          type: string
+        Operation:
+          type: string
+          enum: [CreateAccount, AddBalance, DeductBalance]
+        Amount:
+          type: number
+          format: float
+          description: Positive for credits, negative for debits.
+        Timestamp:
+          type: string
+          format: date-time
+        TransactionID:
+          type: string
+      required:
+        - ID
+        - UserID
+        - Operation
+        - Amount
+        - Timestamp
+        - TransactionID
     BalanceResponse:
       type: object
       properties:

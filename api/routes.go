@@ -24,6 +24,8 @@ func InitialiseRoutes() http.Handler {
 	route.Post("/balance", CreateAccount)
 	route.Post("/balance/add", AddAmountHandler)
 	route.Post("/balance/deduct", DeductAmountHandler)
+
+	route.Get("/logs", GetLogsHandler)
 	return route
 }
 
