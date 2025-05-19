@@ -120,12 +120,6 @@ The application uses the following environment variables (defined in `.env`):
 
 ## Testing
 
-The project includes a comprehensive testing strategy:
-
-1. **Unit Tests**: Test individual components and business logic.
-2. **Integration Tests**: Validate interactions between PostgreSQL, MongoDB, and Kafka.
-3. **Mocking**: Use mocks for external dependencies to ensure robust validation.
-
 Run tests using:
 ```bash
 go test ./...
